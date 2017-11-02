@@ -1,0 +1,6 @@
+F:\ResetImage\ResetImage\ResetImage\bin\Debug\ResetImage.exe
+F:\ResetImage\ResetImage\ResetImage\bin\Debug\ResetImage.pdb
+F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyReference.cache
+F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.csproj.CoreCompileInputs.cache
+F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.exe
+F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.pdb
