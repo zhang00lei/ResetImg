@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ResetImage
 {
@@ -35,6 +36,18 @@ namespace ResetImage
             string str = temp[temp.Length - 1];
             filePath = filePath.Replace("\\"+str,string.Empty);
             return filePath;
+        }
+
+        public static string[] GetValueBracket(string info)
+        {
+            List<string> result = new List<string>();
+            Regex reg = new Regex(@"(?is)(?<=\()[^\)]+(?=\))");
+            MatchCollection mc = reg.Matches(info);
+            foreach (Match m in mc)
+            {
+                result.Add(m.Value);
+            }
+            return result.ToArray();
         }
     }
 }
