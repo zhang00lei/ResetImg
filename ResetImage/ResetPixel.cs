@@ -20,10 +20,88 @@ namespace ResetImage
             public int y;
         }
 
+        private struct imgPos {
+            public int Start_X;
+            public int Start_Y;
+            public int End_X;
+            public int End_Y;
+        }
+
+        private int _getX(Bitmap bitmap,bool isStart)
+        {
+            int startIndex_X,endIndex_X,addCount;
+            if (isStart)
+            {
+                startIndex_X = 0;
+                endIndex_X = bitmap.Width - 1;
+                addCount = 1;
+            }
+            else {
+                startIndex_X = bitmap.Width - 1;
+                endIndex_X = 0;
+                addCount = -1;
+            }
+            for (int i = startIndex_X; i != endIndex_X; i += addCount)
+            {
+                for (int j = 0, height = bitmap.Height; j < height; j++)
+                {
+                    if (bitmap.GetPixel(i, j).ToArgb() != 0)
+                    {
+                        return i;
+                    }
+                }
+            } 
+            return 0;
+        }
+        private int _getY(Bitmap bitmap, bool isStart)
+        {
+            int startIndex_Y, endIndex_Y, addCount;
+            if (isStart)
+            {
+                startIndex_Y = 0;
+                endIndex_Y = bitmap.Height - 1;
+                addCount = 1;
+            }
+            else
+            {
+                startIndex_Y = bitmap.Height - 1;
+                endIndex_Y = 0;
+                addCount = -1;
+            }
+            for (int i = startIndex_Y; i != endIndex_Y; i += addCount)
+            {
+                for (int j = 0, width = bitmap.Width; j < width; j++)
+                {
+                    if (bitmap.GetPixel(j, i).ToArgb() != 0)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        private imgPos _getImgPos(Bitmap bitmap,bool isTrim)
+        {
+            imgPos pos = new imgPos();
+            if (isTrim)
+            {
+                pos.Start_X = _getX(bitmap, true);
+                pos.End_X = _getX(bitmap, false);
+                pos.Start_Y = _getY(bitmap, true);
+                pos.End_Y = _getY(bitmap, false); 
+            } 
+            return pos;
+        }
+        private bool _isTrim;
         //对应图片的绝对路径
         private Dictionary<string, string> imgPathInfoDic = new Dictionary<string, string>();
         private void _setImagePathByTpsFilePath(string tpsPath)
         {
+            string str = File.ReadAllText(tpsPath);
+            Regex regex = new Regex("<enum type=\"SpriteSettings::TrimMode\">*</enum>");
+           Match match = regex.Match(str);
+           Console.WriteLine( match.Value);
             XmlDocument doc = new XmlDocument();
             doc.Load(tpsPath);
             XmlNodeList xnl = doc.ChildNodes[1].ChildNodes[0].ChildNodes;
@@ -52,19 +130,19 @@ namespace ResetImage
             }
         }
 
-        public void DrawImage(string tpsheetPath, string tpsPath, int type)
+        public void DrawImage(string configPath, string tpsPath, int type)
         {
             //默认tpssheet文件和对应的png文件放置于同一目录下
             string imgPath;
             if (type == 0)
             {
-                _setImageInfoByTpsheetFilePath(tpsheetPath);
-                imgPath = tpsheetPath.Replace(".tpsheet", ".png");
+                _setImageInfoByTpsheetFilePath(configPath);
+                imgPath = configPath.Replace(".tpsheet", ".png");
             }
             else
             {
-                _setImageInfoByJsonFilePath(tpsheetPath);
-                imgPath = tpsheetPath.Replace(".txt", ".png");
+                _setImageInfoByJsonFilePath(configPath);
+                imgPath = configPath.Replace(".txt", ".png");
             }
             _setImagePathByTpsFilePath(tpsPath);
 
@@ -73,9 +151,10 @@ namespace ResetImage
             {
                 string imgPathTemp = imgPathInfoDic[kv.Key];
                 Bitmap imgBitmapTemp = new Bitmap(Bitmap.FromFile(imgPathTemp));
-                for (int i = 0, width = kv.Value.Width; i < width; i++)
+                imgPos pos = _getImgPos(imgBitmapTemp,true);
+                for (int i = pos.Start_X; i < pos.End_X; i++)
                 {
-                    for (int j = 0, height = kv.Value.Height; j < height; j++)
+                    for (int j = pos.Start_Y; j < pos.End_Y; j++)
                     {
                         bmp.SetPixel(
                             i + kv.Value.x,
@@ -121,18 +200,17 @@ namespace ResetImage
             string[] infoArray = File.ReadAllLines(tpsheetPath);
             for (int i = 0, length = infoArray.Length; i < length; i++)
             {
-                if (infoArray[i].StartsWith("#") || infoArray[i] == "")
+                if (infoArray[i].StartsWith("#") || infoArray[i] == ""||infoArray[i].StartsWith(":"))
                 {
-                    string repTemp = "# Sprite sheet: ";
-                    if (infoArray[i].StartsWith(repTemp))
+                    if (infoArray[i].StartsWith(":size="))
                     {
-                        string imgInfo = Util.GetValueBracket(infoArray[i])[0];
-                        string[] tempArray = imgInfo.Split('x');
+                        string strTemp = infoArray[i].Replace(":size=",string.Empty);
+                        string[] tempArray = strTemp.Split('x');
                         _imgWidth = int.Parse(tempArray[0].Trim());
                         _imgHeight = int.Parse(tempArray[1].Trim());
                     }
                     continue;
-                }
+                } 
                 imgInfo info = new imgInfo();
                 string[] temp = infoArray[i].Split(';');
                 info.ImgName = temp[0];
