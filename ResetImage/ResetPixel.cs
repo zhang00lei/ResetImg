@@ -99,9 +99,8 @@ namespace ResetImage
         private void _setImagePathByTpsFilePath(string tpsPath)
         {
             string str = File.ReadAllText(tpsPath);
-            Regex regex = new Regex("<enum type=\"SpriteSettings::TrimMode\">*</enum>");
-           Match match = regex.Match(str);
-           Console.WriteLine( match.Value);
+            Regex regex = new Regex("<enum type=\"SpriteSettings::TrimMode\">None</enum>");
+            _isTrim = !regex.IsMatch(str); 
             XmlDocument doc = new XmlDocument();
             doc.Load(tpsPath);
             XmlNodeList xnl = doc.ChildNodes[1].ChildNodes[0].ChildNodes;
@@ -151,7 +150,7 @@ namespace ResetImage
             {
                 string imgPathTemp = imgPathInfoDic[kv.Key];
                 Bitmap imgBitmapTemp = new Bitmap(Bitmap.FromFile(imgPathTemp));
-                imgPos pos = _getImgPos(imgBitmapTemp,true);
+                imgPos pos = _getImgPos(imgBitmapTemp,_isTrim);
                 for (int i = pos.Start_X; i < pos.End_X; i++)
                 {
                     for (int j = pos.Start_Y; j < pos.End_Y; j++)

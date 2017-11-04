@@ -33,6 +33,7 @@ namespace ResetImage
                 //for UGUI
                 reset.DrawImage(configPath, tpsPath, 0);
             }
+            Console.ReadLine();
         }
     }
 }
