@@ -20,8 +20,8 @@ namespace ResetImage
             }
             else
             { 
-                tpsPath = @"F:\UnityGame_UGUI\ArtResource\Atlas\AtlasLoad.tps";
-                configPath = @"F:\UnityGame_UGUI\Assets\Atlas\AtlasLoad\AtlasLoad.tpsheet";
+                tpsPath = @"E:\project\美术资源\第四版美术资源\Atlas\AtlasGameItem.tps";
+                configPath = @"E:\project\Branch\ClientWorkBranch\NewUI_V4\Assets\Resources\Res\Atlas_V4\AtlasGameItem\AtlasGameItem.txt";
             }
             if (configPath.EndsWith(".txt"))
             {
@@ -33,7 +33,6 @@ namespace ResetImage
                 //for UGUI
                 reset.DrawImage(configPath, tpsPath, 0);
             }
-            Console.ReadLine();
         }
     }
 }

@@ -156,8 +156,8 @@ namespace ResetImage
                     for (int j = pos.Start_Y; j < pos.End_Y; j++)
                     {
                         bmp.SetPixel(
-                            i + kv.Value.x,
-                            j + kv.Value.y,
+                            (i-pos.Start_X) + kv.Value.x,
+                            (j-pos.Start_Y) + kv.Value.y,
                             imgBitmapTemp.GetPixel(i, j)
                             );
                     }
