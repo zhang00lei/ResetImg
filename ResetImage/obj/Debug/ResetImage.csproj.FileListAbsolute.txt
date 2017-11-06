@@ -4,10 +4,10 @@ F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyRe
 F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.csproj.CoreCompileInputs.cache
 F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.exe
 F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.pdb
-F:\ResetImg\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyReference.cache
-F:\ResetImg\ResetImage\obj\Debug\ResetImage.csproj.CoreCompileInputs.cache
 F:\ResetImg\ResetImage\bin\Debug\ResetImage.exe
 F:\ResetImg\ResetImage\bin\Debug\ResetImage.pdb
 F:\ResetImg\ResetImage\bin\Debug\Newtonsoft.Json.dll
+F:\ResetImg\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyReference.cache
+F:\ResetImg\ResetImage\obj\Debug\ResetImage.csproj.CoreCompileInputs.cache
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.exe
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.pdb
