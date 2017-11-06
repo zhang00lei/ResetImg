@@ -7,7 +7,11 @@ F:\ResetImage\ResetImage\ResetImage\obj\Debug\ResetImage.pdb
 F:\ResetImg\ResetImage\bin\Debug\ResetImage.exe
 F:\ResetImg\ResetImage\bin\Debug\ResetImage.pdb
 F:\ResetImg\ResetImage\bin\Debug\Newtonsoft.Json.dll
+<<<<<<< HEAD
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyReference.cache
+=======
+>>>>>>> 48269fb9d937ff238df2929383ba0b418d6c62c9
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.csproj.CoreCompileInputs.cache
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.exe
 F:\ResetImg\ResetImage\obj\Debug\ResetImage.pdb
+F:\ResetImg\ResetImage\obj\Debug\ResetImage.csprojResolveAssemblyReference.cache
