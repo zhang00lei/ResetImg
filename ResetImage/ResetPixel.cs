@@ -89,8 +89,14 @@ namespace ResetImage
                 pos.Start_X = _getX(bitmap, true);
                 pos.End_X = _getX(bitmap, false);
                 pos.Start_Y = _getY(bitmap, true);
-                pos.End_Y = _getY(bitmap, false); 
-            } 
+                pos.End_Y = _getY(bitmap, false);
+            }
+            else {
+                pos.Start_X = 0;
+                pos.Start_Y = 0;
+                pos.End_X = bitmap.Width - 1;
+                pos.End_Y = bitmap.Height - 1;
+            }
             return pos;
         }
         private bool _isTrim;
@@ -151,9 +157,9 @@ namespace ResetImage
                 string imgPathTemp = imgPathInfoDic[kv.Key];
                 Bitmap imgBitmapTemp = new Bitmap(Bitmap.FromFile(imgPathTemp));
                 imgPos pos = _getImgPos(imgBitmapTemp,_isTrim);
-                for (int i = pos.Start_X; i < pos.End_X; i++)
+                for (int i = pos.Start_X; i <= pos.End_X; i++)
                 {
-                    for (int j = pos.Start_Y; j < pos.End_Y; j++)
+                    for (int j = pos.Start_Y; j <= pos.End_Y; j++)
                     {
                         bmp.SetPixel(
                             (i-pos.Start_X) + kv.Value.x,
